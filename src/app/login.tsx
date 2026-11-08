@@ -19,6 +19,7 @@ const logo = require('../assets/logo_transp.png');
 export default function LoginScreen() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -51,14 +52,29 @@ export default function LoginScreen() {
             <TextInput
               placeholder="••••••••••"
               placeholderTextColor="#b9bec9"
-              secureTextEntry
+              secureTextEntry={!showPassword}
               style={styles.input}
               value={password}
               onChangeText={setPassword}
             />
+            <Pressable
+              accessibilityLabel={showPassword ? 'Ocultar senha' : 'Mostrar senha'}
+              accessibilityRole="button"
+              onPress={() => setShowPassword((visible) => !visible)}
+              style={styles.eyeButton}
+            >
+              <MaterialCommunityIcons
+                name={showPassword ? 'eye-off-outline' : 'eye-outline'}
+                size={17}
+                color="#7b98ce"
+              />
+            </Pressable>
           </View>
 
-          <Pressable style={styles.forgotButton}>
+          <Pressable
+            style={styles.forgotButton}
+            onPress={() => router.push('/reset-password' as Href)}
+          >
             <Text style={styles.forgotText}>Esqueceu a senha?</Text>
           </Pressable>
 
@@ -106,6 +122,7 @@ const styles = StyleSheet.create({
     fontSize: 13,
     paddingVertical: 7,
   },
+  eyeButton: { padding: 3 },
   forgotButton: { alignSelf: 'flex-end', marginTop: -14, marginBottom: 27 },
   forgotText: { color: '#143d9f', fontFamily: 'Quicksand_600SemiBold', fontSize: 11 },
   primaryButton: {
