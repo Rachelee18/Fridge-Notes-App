@@ -53,7 +53,7 @@ export function mapGoogleProfile(
   profile: GoogleProfile,
   tokens: GoogleTokens,
 ): AuthResult {
-  if (!profile.email || !profile.name) {
+  if (!profile.email) {
     return {
       ok: false,
       code: 'missing_profile',
@@ -67,7 +67,7 @@ export function mapGoogleProfile(
       user: {
         id: profile.sub,
         email: profile.email,
-        name: profile.name,
+        name: profile.name ?? profile.email,
         picture: profile.picture,
         provider: 'google',
       },
