@@ -14,7 +14,7 @@ import { Image } from 'expo-image';
 import { FontAwesome5, MaterialCommunityIcons } from '@expo/vector-icons';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-const logo = require('../assets/logo_transp.png');
+const logo = require('../../assets/logo_transp.png');
 
 export default function LoginScreen() {
   const [email, setEmail] = useState('');
