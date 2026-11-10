@@ -11,6 +11,7 @@ import {
 import { Image } from 'expo-image';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import ScreenHeader from '../../components/ScreenHeader';
 
 const logo = require('../../assets/logo_transp.png');
 
@@ -23,6 +24,7 @@ export default function ResetPasswordScreen() {
         style={styles.container}
         behavior={Platform.OS === 'ios' ? 'padding' : undefined}
       >
+        <ScreenHeader />
         <View style={styles.content}>
           <Image source={logo} contentFit="contain" style={styles.logo} />
 
@@ -61,8 +63,8 @@ export default function ResetPasswordScreen() {
 }
 
 const styles = StyleSheet.create({
-  safeArea: { flex: 1, backgroundColor: '#fff' },
-  container: { flex: 1 },
+  safeArea: { flex: 1, backgroundColor: '#8bbcf2' },
+  container: { flex: 1, backgroundColor: '#fff' },
   content: {
     flex: 1,
     paddingHorizontal: 33,

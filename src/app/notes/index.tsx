@@ -9,6 +9,7 @@ import {
   View,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import ScreenHeader from '../../components/ScreenHeader';
 
 type Note = {
   title: string;
@@ -58,6 +59,7 @@ export default function NotesScreen() {
 
   return (
     <SafeAreaView style={styles.safeArea} edges={['top', 'left', 'right']}>
+      <ScreenHeader />
       <View style={styles.container}>
         <ScrollView
           contentContainerStyle={styles.content}
@@ -151,7 +153,7 @@ export default function NotesScreen() {
 }
 
 const styles = StyleSheet.create({
-  safeArea: { flex: 1, backgroundColor: '#fff' },
+  safeArea: { flex: 1, backgroundColor: '#8bbcf2' },
   container: { flex: 1, backgroundColor: '#fff' },
   content: { paddingTop: 20, paddingBottom: 92 },
   heading: {
