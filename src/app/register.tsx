@@ -6,12 +6,13 @@ import {
   Pressable,
   StyleSheet,
   Text,
-  TextInput,
   View,
 } from 'react-native';
 import { Image } from 'expo-image';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { SafeAreaView } from 'react-native-safe-area-context';
+
+import { TextField } from '../components/ui';
 
 const logo = require('../assets/logo_transp.png');
 
@@ -22,8 +23,6 @@ export default function RegisterScreen() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmation, setConfirmation] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmation, setShowConfirmation] = useState(false);
   const [showGenderOptions, setShowGenderOptions] = useState(false);
 
   return (
@@ -36,24 +35,20 @@ export default function RegisterScreen() {
           <Image source={logo} contentFit="contain" style={styles.logo} />
           <Text style={styles.heading}>Novo Cadastro</Text>
 
-          <Text style={styles.label}>Nome</Text>
-          <TextInput
+          <TextField
+            label="Nome"
             placeholder="Seu nome aqui"
-            placeholderTextColor="#b9bec9"
-            style={[styles.input, styles.inputLine]}
             value={name}
             onChangeText={setName}
           />
 
           <View style={styles.row}>
             <View style={styles.column}>
-              <Text style={styles.label}>Idade</Text>
-              <TextInput
+              <TextField
+                label="Idade"
                 keyboardType="number-pad"
                 maxLength={3}
                 placeholder="XX"
-                placeholderTextColor="#b9bec9"
-                style={[styles.input, styles.inputLine]}
                 value={age}
                 onChangeText={(value) => setAge(value.replace(/[^0-9]/g, ''))}
               />
@@ -93,69 +88,35 @@ export default function RegisterScreen() {
             </View>
           </View>
 
-          <Text style={styles.label}>E-mail</Text>
-          <TextInput
+          <TextField
+            label="E-mail"
             autoCapitalize="none"
             autoComplete="email"
             keyboardType="email-address"
             placeholder="email@example.com"
-            placeholderTextColor="#b9bec9"
-            style={[styles.input, styles.inputLine]}
             value={email}
             onChangeText={setEmail}
           />
 
-          <Text style={styles.label}>Senha</Text>
-          <View style={styles.inputRow}>
-            <MaterialCommunityIcons name="lock-outline" size={15} color="#7b98ce" />
-            <TextInput
-              placeholder="••••••••••"
-              placeholderTextColor="#b9bec9"
-              secureTextEntry={!showPassword}
-              style={[styles.input, styles.inputRowInput]}
-              value={password}
-              onChangeText={setPassword}
-            />
-            <Pressable
-              accessibilityLabel={showPassword ? 'Ocultar senha' : 'Mostrar senha'}
-              accessibilityRole="button"
-              onPress={() => setShowPassword((visible) => !visible)}
-              style={styles.eyeButton}
-            >
-              <MaterialCommunityIcons
-                name={showPassword ? 'eye-off-outline' : 'eye-outline'}
-                size={17}
-                color="#7b98ce"
-              />
-            </Pressable>
-          </View>
+          <TextField
+            label="Senha"
+            icon="lock-outline"
+            secure
+            visibilityLabel="senha"
+            placeholder="••••••••••"
+            value={password}
+            onChangeText={setPassword}
+          />
 
-          <Text style={styles.label}>Repita a senha</Text>
-          <View style={styles.inputRow}>
-            <MaterialCommunityIcons name="lock-outline" size={15} color="#7b98ce" />
-            <TextInput
-              placeholder="••••••••••"
-              placeholderTextColor="#b9bec9"
-              secureTextEntry={!showConfirmation}
-              style={[styles.input, styles.inputRowInput]}
-              value={confirmation}
-              onChangeText={setConfirmation}
-            />
-            <Pressable
-              accessibilityLabel={
-                showConfirmation ? 'Ocultar confirmação de senha' : 'Mostrar confirmação de senha'
-              }
-              accessibilityRole="button"
-              onPress={() => setShowConfirmation((visible) => !visible)}
-              style={styles.eyeButton}
-            >
-              <MaterialCommunityIcons
-                name={showConfirmation ? 'eye-off-outline' : 'eye-outline'}
-                size={17}
-                color="#7b98ce"
-              />
-            </Pressable>
-          </View>
+          <TextField
+            label="Repita a senha"
+            icon="lock-outline"
+            secure
+            visibilityLabel="confirmação de senha"
+            placeholder="••••••••••"
+            value={confirmation}
+            onChangeText={setConfirmation}
+          />
 
           <Pressable style={({ pressed }) => [styles.primaryButton, pressed && styles.pressed]}>
             <Text style={styles.primaryText}>Cadastrar</Text>
@@ -179,25 +140,6 @@ const styles = StyleSheet.create({
   label: { color: '#143d9f', fontFamily: 'Quicksand_600SemiBold', fontSize: 12, marginBottom: 4 },
   row: { flexDirection: 'row', gap: 48 },
   column: { flex: 1 },
-  inputRow: {
-    alignItems: 'center',
-    flexDirection: 'row',
-    gap: 7,
-    borderBottomWidth: 1.5,
-    borderBottomColor: '#143d9f',
-    marginBottom: 13,
-  },
-  input: {
-    color: '#182b55',
-    fontFamily: 'Quicksand_400Regular',
-    fontSize: 13,
-    paddingVertical: 6,
-    marginBottom: 13,
-  },
-  inputLine: {
-    borderBottomWidth: 1.5,
-    borderBottomColor: '#143d9f',
-  },
   select: {
   alignItems: 'center',
   borderBottomWidth: 1.5,
@@ -222,8 +164,6 @@ const styles = StyleSheet.create({
   },
   option: { paddingHorizontal: 10, paddingVertical: 8 },
   optionText: { color: '#143d9f', fontFamily: 'Quicksand_400Regular', fontSize: 12 },
-  inputRowInput: { flex: 1 },
-  eyeButton: { padding: 3 },
   primaryButton: {
     height: 38,
     borderRadius: 22,

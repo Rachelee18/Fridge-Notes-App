@@ -5,12 +5,12 @@ import {
   Pressable,
   StyleSheet,
   Text,
-  TextInput,
   View,
 } from 'react-native';
 import { Image } from 'expo-image';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { SafeAreaView } from 'react-native-safe-area-context';
+
+import { TextField } from '../components/ui';
 
 const logo = require('../assets/logo_transp.png');
 
@@ -28,25 +28,18 @@ export default function ResetPasswordScreen() {
 
           <View style={styles.form}>
             <Text style={styles.heading}>Redefinir Senha</Text>
-            <Text style={styles.label}>Informe o email cadastrado</Text>
 
-            <View style={styles.inputRow}>
-              <MaterialCommunityIcons name="email-outline" size={16} color="#7b98ce" />
-              <TextInput
-                autoCapitalize="none"
-                autoComplete="email"
-                keyboardType="email-address"
-                placeholder="email@example.com"
-                placeholderTextColor="#b9bec9"
-                style={styles.input}
-                value={email}
-                onChangeText={setEmail}
-              />
-            </View>
-
-            <Text style={styles.helper}>
-              Ao clicar em enviar, a sua nova senha será enviada para o email informado.
-            </Text>
+            <TextField
+              label="Informe o email cadastrado"
+              icon="email-outline"
+              autoCapitalize="none"
+              autoComplete="email"
+              keyboardType="email-address"
+              placeholder="email@example.com"
+              value={email}
+              onChangeText={setEmail}
+              helper="Ao clicar em enviar, a sua nova senha será enviada para o email informado."
+            />
 
             <Pressable
               style={({ pressed }) => [styles.primaryButton, pressed && styles.pressed]}
@@ -79,34 +72,6 @@ const styles = StyleSheet.create({
     fontFamily: 'Quicksand_700Bold',
     fontSize: 23,
     marginBottom: 12,
-  },
-  label: {
-    color: '#143d9f',
-    fontFamily: 'Quicksand_600SemiBold',
-    fontSize: 13,
-    marginBottom: 5,
-  },
-  inputRow: {
-    alignItems: 'center',
-    flexDirection: 'row',
-    gap: 7,
-    borderBottomWidth: 1.5,
-    borderBottomColor: '#143d9f',
-  },
-  input: {
-    flex: 1,
-    color: '#182b55',
-    fontFamily: 'Quicksand_400Regular',
-    fontSize: 13,
-    paddingVertical: 6,
-  },
-  helper: {
-    color: '#65a3f2',
-    fontFamily: 'Quicksand_400Regular',
-    fontSize: 11,
-    lineHeight: 14,
-    marginTop: 8,
-    maxWidth: 290,
   },
   primaryButton: {
     height: 44,

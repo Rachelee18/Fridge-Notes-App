@@ -7,13 +7,13 @@ import {
   Pressable,
   StyleSheet,
   Text,
-  TextInput,
   View,
 } from 'react-native';
 import { Image } from 'expo-image';
-import { FontAwesome5, MaterialCommunityIcons } from '@expo/vector-icons';
+import { FontAwesome5 } from '@expo/vector-icons';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import { TextField } from '../components/ui';
 import { validateAuthForm } from '../validation';
 
 const logo = require('../assets/logo_transp.png');
@@ -21,7 +21,6 @@ const logo = require('../assets/logo_transp.png');
 export default function LoginScreen() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
   const [message, setMessage] = useState('');
 
   return (
@@ -34,51 +33,32 @@ export default function LoginScreen() {
           <Image source={logo} contentFit="contain" style={styles.logo} />
           <Text style={styles.heading}>Login</Text>
 
-          <Text style={styles.label}>E-mail</Text>
-          <View style={styles.inputRow}>
-            <MaterialCommunityIcons name="email-outline" size={15} color="#7b98ce" />
-            <TextInput
-              autoCapitalize="none"
-              autoComplete="email"
-              keyboardType="email-address"
-              placeholder="email@example.com"
-              placeholderTextColor="#b9bec9"
-              style={styles.input}
-              value={email}
-              onChangeText={(value) => {
-                setEmail(value);
-                setMessage('');
-              }}
-            />
-          </View>
+          <TextField
+            label="E-mail"
+            icon="email-outline"
+            autoCapitalize="none"
+            autoComplete="email"
+            keyboardType="email-address"
+            placeholder="email@example.com"
+            value={email}
+            onChangeText={(value) => {
+              setEmail(value);
+              setMessage('');
+            }}
+          />
 
-          <Text style={styles.label}>Senha</Text>
-          <View style={styles.inputRow}>
-            <MaterialCommunityIcons name="lock-outline" size={15} color="#7b98ce" />
-            <TextInput
-              placeholder="••••••••••"
-              placeholderTextColor="#b9bec9"
-              secureTextEntry={!showPassword}
-              style={styles.input}
-              value={password}
-              onChangeText={(value) => {
-                setPassword(value);
-                setMessage('');
-              }}
-            />
-            <Pressable
-              accessibilityLabel={showPassword ? 'Ocultar senha' : 'Mostrar senha'}
-              accessibilityRole="button"
-              onPress={() => setShowPassword((visible) => !visible)}
-              style={styles.eyeButton}
-            >
-              <MaterialCommunityIcons
-                name={showPassword ? 'eye-off-outline' : 'eye-outline'}
-                size={17}
-                color="#7b98ce"
-              />
-            </Pressable>
-          </View>
+          <TextField
+            label="Senha"
+            icon="lock-outline"
+            secure
+            visibilityLabel="senha"
+            placeholder="••••••••••"
+            value={password}
+            onChangeText={(value) => {
+              setPassword(value);
+              setMessage('');
+            }}
+          />
 
           <Pressable
             style={styles.forgotButton}
@@ -133,23 +113,6 @@ const styles = StyleSheet.create({
   content: { flex: 1, paddingHorizontal: 28, paddingTop: 30, paddingBottom: 22 },
   logo: { width: '100%', height: 155, marginBottom: 18 },
   heading: { color: '#143d9f', fontFamily: 'Quicksand_700Bold', fontSize: 22, marginBottom: 24 },
-  label: { color: '#143d9f', fontFamily: 'Quicksand_600SemiBold', fontSize: 12, marginBottom: 5 },
-  inputRow: {
-    alignItems: 'center',
-    flexDirection: 'row',
-    gap: 7,
-    borderBottomWidth: 1.5,
-    borderBottomColor: '#568ff1',
-    marginBottom: 20,
-  },
-  input: {
-    flex: 1,
-    color: '#182b55',
-    fontFamily: 'Quicksand_400Regular',
-    fontSize: 13,
-    paddingVertical: 7,
-  },
-  eyeButton: { padding: 3 },
   forgotButton: { alignSelf: 'flex-end', marginTop: -14, marginBottom: 27 },
   forgotText: { color: '#143d9f', fontFamily: 'Quicksand_600SemiBold', fontSize: 11 },
   primaryButton: {
