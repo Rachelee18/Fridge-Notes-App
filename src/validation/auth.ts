@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import type { AuthMode } from '../types';
+import type { AuthCredentials, AuthFormValues, AuthMode } from '../types';
 import { emailSchema, passwordSchema } from './common';
 import { validateForm, type ValidationResult } from './result';
 
@@ -24,17 +24,6 @@ export const signupSchema = z
       });
     }
   });
-
-export type AuthFormValues = {
-  email: string;
-  password: string;
-  passwordConfirmation?: string;
-};
-
-export type AuthCredentials = {
-  email: string;
-  password: string;
-};
 
 export function validateAuthForm(
   mode: AuthMode,

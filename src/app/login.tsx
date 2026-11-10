@@ -13,6 +13,7 @@ import { Image } from 'expo-image';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import { useGoogleSignIn } from '../auth';
 import { TextField } from '../components/ui';
 import { validateAuthForm } from '../validation';
 
@@ -22,6 +23,7 @@ export default function LoginScreen() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
+  const { signIn, isLoading } = useGoogleSignIn();
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -97,9 +99,27 @@ export default function LoginScreen() {
           </View>
 
           <Text style={styles.orText}>Ou</Text>
-          <Pressable style={({ pressed }) => [styles.googleButton, pressed && styles.pressed]}>
+          <Pressable
+            accessibilityRole="button"
+            accessibilityState={{ disabled: isLoading, busy: isLoading }}
+            disabled={isLoading}
+            style={({ pressed }) => [
+              styles.googleButton,
+              (pressed || isLoading) && styles.pressed,
+            ]}
+            onPress={async () => {
+              const result = await signIn();
+
+              if (!result.ok) {
+                setMessage(result.message);
+                return;
+              }
+
+              router.replace('/notes' as Href);
+            }}
+          >
             <FontAwesome5 name="google" size={14} color="#4285F4" />
-            <Text style={styles.googleText}>Sign up with Google</Text>
+            <Text style={styles.googleText}>Entrar com Google</Text>
           </Pressable>
         </View>
       </KeyboardAvoidingView>
@@ -142,7 +162,6 @@ const styles = StyleSheet.create({
     gap: 8,
     backgroundColor: '#e1e5ed',
   },
-  googleG: { color: '#4285f4', fontSize: 17, fontWeight: '700' },
   googleText: { color: '#143d9f', fontFamily: 'Quicksand_700Bold', fontSize: 11 },
   pressed: { opacity: 0.7 },
 });
