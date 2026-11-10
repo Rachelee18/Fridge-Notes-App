@@ -3,6 +3,7 @@ import { Pressable, ScrollView, Text, TextInput, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import type { AuthMode } from '@/types';
+import { validateAuthForm } from '@/validation';
 
 export default function LoginScreen() {
   const [mode, setMode] = useState<AuthMode>('login');
@@ -12,18 +13,10 @@ export default function LoginScreen() {
   const [message, setMessage] = useState('');
 
   function submitForm() {
-    if (!email.trim() || !email.includes('@')) {
-      setMessage('Informe um e-mail válido.');
-      return;
-    }
+    const result = validateAuthForm(mode, { email, password, passwordConfirmation });
 
-    if (password.length < 8) {
-      setMessage('A senha deve ter pelo menos 8 caracteres.');
-      return;
-    }
-
-    if (mode === 'signup' && password !== passwordConfirmation) {
-      setMessage('As senhas não coincidem.');
+    if (!result.ok) {
+      setMessage(result.message);
       return;
     }
 

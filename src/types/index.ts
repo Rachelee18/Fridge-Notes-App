@@ -1,1 +1,1 @@
-export type { AuthMode } from './auth';
+export * from '@/types/auth';
