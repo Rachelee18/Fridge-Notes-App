@@ -1,123 +1,34 @@
-import { useState } from "react";
-import { Pressable, ScrollView, Text, TextInput, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { router } from 'expo-router';
+import type { Href } from 'expo-router';
+import { Image, Pressable, Text, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
-import type { AuthMode } from "@/types";
-import { validateAuthForm } from "@/validation";
+import { styles } from '../styles/home';
 
-export default function LoginScreen() {
-  const [mode, setMode] = useState<AuthMode>("login");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [passwordConfirmation, setPasswordConfirmation] = useState("");
-  const [message, setMessage] = useState("");
-
-  function submitForm() {
-    const result = validateAuthForm(mode, {
-      email,
-      password,
-      passwordConfirmation,
-    });
-
-    if (!result.ok) {
-      setMessage(result.message);
-      return;
-    }
-
-    setMessage(
-      mode === "signup"
-        ? "Cadastro ainda não conectado a um serviço de autenticação."
-        : "Login ainda não conectado a um serviço de autenticação.",
-    );
-  }
-
-  function switchMode() {
-    setMode(mode === "login" ? "signup" : "login");
-    setMessage("");
-  }
-
+export default function HomeScreen() {
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <ScrollView
-        contentContainerStyle={{ flexGrow: 1 }}
-        keyboardShouldPersistTaps="handled"
-      >
-        <View>
-          <Text accessibilityRole="header">Fridge Notes</Text>
-          <Text>
-            {mode === "login" ? "Entrar na sua conta" : "Criar uma conta"}
-          </Text>
+    <SafeAreaView style={styles.container}>
+      <View style={styles.hero}>
+        <Image source={require('../assets/logo_transp.png')} style={styles.logo} resizeMode="contain" />
+      </View>
 
-          <Text>E-mail</Text>
-          <TextInput
-            accessibilityLabel="E-mail"
-            autoCapitalize="none"
-            autoComplete="email"
-            keyboardType="email-address"
-            onChangeText={setEmail}
-            placeholder="seu@email.com"
-            textContentType="emailAddress"
-            value={email}
-          />
+      <View style={styles.content}>
+        <Text style={styles.title}>Bem-vindo</Text>
+        <Text style={styles.description}>
+          Anote, compartilhe e organize tudo em um só lugar.
+        </Text>
 
-          <Text>Senha</Text>
-          <TextInput
-            accessibilityLabel="Senha"
-            autoComplete={
-              mode === "signup" ? "new-password" : "current-password"
-            }
-            onChangeText={setPassword}
-            placeholder="Mínimo de 8 caracteres"
-            secureTextEntry
-            textContentType={mode === "signup" ? "newPassword" : "password"}
-            value={password}
-          />
-
-          {mode === "signup" && (
-            <>
-              <Text>Confirme a senha</Text>
-              <TextInput
-                accessibilityLabel="Confirme a senha"
-                autoComplete="new-password"
-                onChangeText={setPasswordConfirmation}
-                placeholder="Digite a senha novamente"
-                secureTextEntry
-                textContentType="newPassword"
-                value={passwordConfirmation}
-              />
-            </>
-          )}
-
-          <Pressable accessibilityRole="button" onPress={submitForm}>
-            <Text>{mode === "login" ? "Entrar" : "Criar conta"}</Text>
-          </Pressable>
-
-          <Text>ou</Text>
-
-          <Pressable
-            accessibilityRole="button"
-            onPress={() =>
-              setMessage(
-                "Login com Google ainda precisa ser conectado ao OAuth do aplicativo.",
-              )
-            }
-          >
-            <Text>Continuar com Google</Text>
-          </Pressable>
-
-          {message ? (
-            <Text accessibilityLiveRegion="polite">{message}</Text>
-          ) : null}
-
-          <Pressable accessibilityRole="button" onPress={switchMode}>
-            <Text>
-              {mode === "login"
-                ? "Não tem uma conta? Criar conta"
-                : "Já tem uma conta? Entrar"}
-            </Text>
-          </Pressable>
-        </View>
-      </ScrollView>
+        <Pressable
+          accessibilityRole="button"
+          style={({ pressed }) => [styles.continueButton, pressed && styles.pressed]}
+          onPress={() => router.push('/login' as Href)}
+        >
+          <Text style={styles.continueText}>Continuar</Text>
+          <View style={styles.arrowCircle}>
+            <Text style={styles.arrow}>→</Text>
+          </View>
+        </Pressable>
+      </View>
     </SafeAreaView>
   );
 }

@@ -14,12 +14,15 @@ import { Image } from 'expo-image';
 import { FontAwesome5, MaterialCommunityIcons } from '@expo/vector-icons';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import { validateAuthForm } from '../validation';
+
 const logo = require('../assets/logo_transp.png');
 
 export default function LoginScreen() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [message, setMessage] = useState('');
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -42,7 +45,10 @@ export default function LoginScreen() {
               placeholderTextColor="#b9bec9"
               style={styles.input}
               value={email}
-              onChangeText={setEmail}
+              onChangeText={(value) => {
+                setEmail(value);
+                setMessage('');
+              }}
             />
           </View>
 
@@ -55,7 +61,10 @@ export default function LoginScreen() {
               secureTextEntry={!showPassword}
               style={styles.input}
               value={password}
-              onChangeText={setPassword}
+              onChangeText={(value) => {
+                setPassword(value);
+                setMessage('');
+              }}
             />
             <Pressable
               accessibilityLabel={showPassword ? 'Ocultar senha' : 'Mostrar senha'}
@@ -78,9 +87,24 @@ export default function LoginScreen() {
             <Text style={styles.forgotText}>Esqueceu a senha?</Text>
           </Pressable>
 
+          {message ? (
+            <Text accessibilityLiveRegion="polite" style={styles.error}>
+              {message}
+            </Text>
+          ) : null}
+
           <Pressable
             style={({ pressed }) => [styles.primaryButton, pressed && styles.pressed]}
-            onPress={() => router.replace('/notes' as Href)}
+            onPress={() => {
+              const result = validateAuthForm('login', { email, password });
+
+              if (!result.ok) {
+                setMessage(result.message);
+                return;
+              }
+
+              router.replace('/notes' as Href);
+            }}
           >
             <Text style={styles.primaryText}>Entrar</Text>
           </Pressable>
@@ -136,6 +160,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#173fa5',
   },
   primaryText: { color: '#fff', fontFamily: 'Quicksand_700Bold', fontSize: 13 },
+  error: {
+    color: '#d64550',
+    fontFamily: 'Quicksand_600SemiBold',
+    fontSize: 11,
+    marginBottom: 8,
+  },
   accountRow: { flexDirection: 'row', justifyContent: 'center', marginTop: 7 },
   secondaryText: { color: '#143d9f', fontFamily: 'Quicksand_400Regular', fontSize: 10 },
   linkText: { color: '#5798f4', fontFamily: 'Quicksand_600SemiBold', fontSize: 10 },
