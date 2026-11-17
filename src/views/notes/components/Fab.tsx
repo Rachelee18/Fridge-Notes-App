@@ -3,10 +3,7 @@ import { Pressable } from 'react-native';
 
 import { colors } from '../../../config/theme';
 import { notesStyles } from '../../../styles/NotesStyles';
-
-type FabProps = {
-  onCreate: () => void;
-};
+import FabProps from '@/types/fabprops';
 
 export default function Fab({ onCreate }: FabProps) {
   return (

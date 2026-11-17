@@ -1,18 +1,9 @@
 import { TextInput } from 'react-native';
-import type { TextInputProps } from 'react-native';
 
 import { colors } from '../../config/theme';
 import { onlyDigits } from '../../lib/digits';
 import { formStyles } from '../../styles/FormStyles';
-
-type AgeInputProps = Omit<
-  TextInputProps,
-  'value' | 'onChangeText' | 'keyboardType' | 'maxLength'
-> & {
-  value: string;
-  onChangeText: (value: string) => void;
-  maxLength?: number;
-};
+import type { AgeInputProps } from '../../types';
 
 export default function AgeInput({
   value,

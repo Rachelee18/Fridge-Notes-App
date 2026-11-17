@@ -1,16 +1,7 @@
-import type { ReactNode } from 'react';
 import { Text, View } from 'react-native';
-import type { StyleProp, TextStyle, ViewStyle } from 'react-native';
 
 import { formStyles } from '../../styles/FormStyles';
-
-type FormFieldProps = {
-  label: string;
-  error?: string;
-  children: ReactNode;
-  style?: StyleProp<ViewStyle>;
-  labelStyle?: StyleProp<TextStyle>;
-};
+import type { FormFieldProps } from '../../types';
 
 export default function FormField({
   label,

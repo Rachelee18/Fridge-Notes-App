@@ -3,14 +3,7 @@ import { Modal, Pressable, Text } from 'react-native';
 
 import { colors } from '../../../config/theme';
 import { notesStyles } from '../../../styles/NotesStyles';
-import type { NoteAction } from '../../../models/note';
-
-type NoteActionsMenuProps = {
-  visible: boolean;
-  actions: NoteAction[];
-  onClose: () => void;
-  onSelect: (action: NoteAction) => void;
-};
+import NoteActionsMenuProps from '@/types/noteactionsmenuprops';
 
 export default function NoteActionsMenu({
   visible,
