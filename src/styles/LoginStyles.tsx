@@ -1,0 +1,70 @@
+import { StyleSheet } from 'react-native';
+
+import { colors, fonts } from '../config/theme';
+
+export const loginStyles = StyleSheet.create({
+  safeArea: { flex: 1, backgroundColor: colors.primaryBlue },
+  container: { flex: 1, backgroundColor: colors.white },
+  content: { flex: 1, paddingHorizontal: 28, paddingTop: 30, paddingBottom: 22 },
+  logo: { width: '100%', height: 155, marginBottom: 18 },
+  heading: {
+    color: colors.navy,
+    fontFamily: fonts.bold,
+    fontSize: 22,
+    marginBottom: 24,
+  },
+  label: {
+    color: colors.navy,
+    fontFamily: fonts.semiBold,
+    fontSize: 12,
+    marginBottom: 5,
+  },
+  inputRow: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    gap: 7,
+    borderBottomWidth: 1.5,
+    borderBottomColor: colors.loginInputBorder,
+    marginBottom: 20,
+  },
+  input: {
+    flex: 1,
+    color: colors.inputText,
+    fontFamily: fonts.regular,
+    fontSize: 13,
+    paddingVertical: 7,
+  },
+  eyeButton: { padding: 3 },
+  forgotButton: { alignSelf: 'flex-end', marginTop: -14, marginBottom: 27 },
+  forgotText: { color: colors.navy, fontFamily: fonts.semiBold, fontSize: 11 },
+  primaryButton: {
+    height: 38,
+    borderRadius: 22,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: colors.button,
+  },
+  primaryText: { color: colors.white, fontFamily: fonts.bold, fontSize: 13 },
+  accountRow: { flexDirection: 'row', justifyContent: 'center', marginTop: 7 },
+  secondaryText: { color: colors.navy, fontFamily: fonts.regular, fontSize: 10 },
+  linkText: { color: colors.link, fontFamily: fonts.semiBold, fontSize: 10 },
+  orText: {
+    alignSelf: 'center',
+    color: colors.navy,
+    fontFamily: fonts.regular,
+    fontSize: 11,
+    marginVertical: 12,
+  },
+  googleButton: {
+    height: 38,
+    borderRadius: 22,
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'row',
+    gap: 8,
+    backgroundColor: colors.googleButton,
+  },
+  googleG: { color: colors.google, fontSize: 17, fontWeight: '700' },
+  googleText: { color: colors.navy, fontFamily: fonts.bold, fontSize: 11 },
+  pressed: { opacity: 0.7 },
+});

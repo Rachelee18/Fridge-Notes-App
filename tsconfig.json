@@ -6,8 +6,32 @@
       "@/*": [
         "./src/*"
       ],
+      "@components/*": [
+        "./src/components/*"
+      ],
+      "@views/*": [
+        "./src/views/*"
+      ],
+      "@viewmodels/*": [
+        "./src/viewmodels/*"
+      ],
+      "@models/*": [
+        "./src/models/*"
+      ],
+      "@config/*": [
+        "./src/config/*"
+      ],
+      "@styles/*": [
+        "./src/styles/*"
+      ],
+      "@hooks/*": [
+        "./src/hooks/*"
+      ],
+      "@lib/*": [
+        "./src/lib/*"
+      ],
       "@/assets/*": [
-        "./assets/*"
+        "./src/assets/*"
       ]
     }
   },
