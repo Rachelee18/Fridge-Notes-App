@@ -1,19 +1,9 @@
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Pressable, Text, View } from 'react-native';
-import type { StyleProp, ViewStyle } from 'react-native';
 
 import { colors } from '../../config/theme';
 import { formStyles } from '../../styles/FormStyles';
-
-type GenderSelectProps = {
-  value: string;
-  options: readonly string[];
-  open: boolean;
-  onToggle: () => void;
-  onSelect: (option: string) => void;
-  placeholder?: string;
-  style?: StyleProp<ViewStyle>;
-};
+import type { GenderSelectProps } from '../../types';
 
 export default function GenderSelect({
   value,

@@ -1,20 +1,11 @@
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Pressable, TextInput } from 'react-native';
-import type { StyleProp, TextInputProps, TextStyle, ViewStyle } from 'react-native';
 
 import { colors } from '../../config/theme';
 import { usePasswordVisibility } from '../../hooks/usePasswordVisibility';
 import { formStyles } from '../../styles/FormStyles';
+import type { PasswordInputProps } from '../../types';
 import InputRow from './InputRow';
-
-type PasswordInputProps = Omit<TextInputProps, 'secureTextEntry'> & {
-  containerStyle?: StyleProp<ViewStyle>;
-  inputStyle?: StyleProp<TextStyle>;
-  visible?: boolean;
-  onToggle?: () => void;
-  showLabel?: string;
-  hideLabel?: string;
-};
 
 export default function PasswordInput({
   containerStyle,

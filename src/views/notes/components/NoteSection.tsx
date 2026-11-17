@@ -1,14 +1,8 @@
 import { Pressable, ScrollView, Text, View } from 'react-native';
 
 import { notesStyles } from '../../../styles/NotesStyles';
-import type { Note, NoteSection as NoteSectionModel } from '../../../models/note';
 import NoteCard from './NoteCard';
-
-type NoteSectionProps = {
-  section: NoteSectionModel;
-  showDivider: boolean;
-  onOpenMenu: (note: Note) => void;
-};
+import NoteSectionProps from '@/types/notesectionprops';
 
 export default function NoteSection({
   section,

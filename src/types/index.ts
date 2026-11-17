@@ -1,3 +1,10 @@
 export type * from './auth';
+export type * from './age-input';
+export type * from './email-input';
+export type * from './form-field';
+export type * from './gender-select';
+export type * from './input-row';
+export type * from './name-input';
+export type * from './password-input';
 export type * from './forms';
 export type * from './note';
