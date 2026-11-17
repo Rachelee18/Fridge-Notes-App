@@ -45,7 +45,7 @@ export const NOTE_SECTIONS = noteSectionSchema.array().parse([
   },
 ]);
 
-const NOTE_ACTION_LABELS = ['Editar', 'Compartilhar', 'Add Widget', 'Deletar'] as const;
+const NOTE_ACTION_LABELS = ['Compartilhar', 'Add Widget', 'Deletar'] as const;
 
 export const NOTE_ACTIONS = noteActionSchema.array().parse(
   NOTE_ACTION_IDS.map((id, index) => ({
